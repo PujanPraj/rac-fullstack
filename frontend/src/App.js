@@ -25,6 +25,9 @@ import EditMember from "./admin/pages/members/EditMember";
 import CreateLeader from "./admin/pages/leader/CreateLeader";
 import TableLeader from "./admin/pages/leader/LeaderTable";
 import EditLeader from "./admin/pages/leader/EditLeader";
+import CreatePastPresident from "./admin/pages/PastPresident/CreatePastPresident";
+import TablePastPresident from "./admin/pages/PastPresident/TablePastPresident";
+import EditPastPresident from "./admin/pages/PastPresident/EditPastPresident";
 
 const MainApp = () => {
   return (
@@ -63,6 +66,21 @@ const MainApp = () => {
             exact
             path="edit-leader-message/:id"
             element={<EditLeader />}
+          />
+          <Route
+            exact
+            path="create-past-president"
+            element={<CreatePastPresident />}
+          />
+          <Route
+            exact
+            path="edit-past-president"
+            element={<TablePastPresident />}
+          />
+          <Route
+            exact
+            path="edit-past-president/:id"
+            element={<EditPastPresident />}
           />
         </Route>
       </Routes>
