@@ -49,6 +49,7 @@ const EditProject = () => {
         <CreateForm
           title={project.title}
           para={project.para}
+          date={project.date}
           onSubmit={handleSubmit}
           loading={loading}
         />

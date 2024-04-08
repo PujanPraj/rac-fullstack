@@ -9,9 +9,9 @@ import {
 
 //create project
 export const createProject = asyncHandler(async (req, res) => {
-  const { title, para } = req.body;
+  const { title, para, date } = req.body;
 
-  if (!(title && para)) {
+  if (!(title && para && date)) {
     throw new ApiError(400, "All fields are required");
   }
 
@@ -26,17 +26,10 @@ export const createProject = asyncHandler(async (req, res) => {
       throw new ApiError(400, "Image upload failed");
     }
 
-    const currentDate = new Date();
-    const formattedDate = `${currentDate.getFullYear()}/${(
-      currentDate.getMonth() + 1
-    )
-      .toString()
-      .padStart(2, "0")}/${currentDate.getDate().toString().padStart(2, "0")}`;
-
     const project = await Project.create({
       title,
       para,
-      date: formattedDate,
+      date,
       img: image.url,
     });
 
@@ -51,7 +44,7 @@ export const createProject = asyncHandler(async (req, res) => {
 //get all projects
 export const getAllProjects = asyncHandler(async (req, res) => {
   try {
-    const projects = await Project.aggregate([{ $sort: { createdAt: -1 } }]);
+    const projects = await Project.find().sort({ createdAt: -1 });
     if (!projects) {
       throw new ApiError(400, "Projects not found");
     }
@@ -161,23 +154,17 @@ export const deleteProject = asyncHandler(async (req, res) => {
 //get 3 latest projects
 export const getLatestProjects = asyncHandler(async (req, res) => {
   try {
-    const latestProjects = await Project.aggregate([
-      { $sort: { createdAt: -1 } },
-      { $limit: 3 },
-    ]);
-
-    if (!latestProjects || latestProjects.length === 0) {
-      throw new ApiError(400, "Projects not found");
+    const latestProjects = await Project.find()
+      .sort({ createdAt: -1 })
+      .limit(3);
+    if (!latestProjects) {
+      throw new ApiError(400, "latestProjects not found");
     }
 
     return res
       .status(200)
       .json(
-        new ApiResponse(
-          200,
-          latestProjects,
-          "Latest projects fetched successfully"
-        )
+        new ApiResponse(200, latestProjects, "Projects fetched successfully")
       );
   } catch (error) {
     throw new ApiError(error);

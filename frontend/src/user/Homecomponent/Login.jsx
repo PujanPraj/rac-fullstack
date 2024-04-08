@@ -19,7 +19,7 @@ const LoginPage = () => {
           password: "",
         }}
         validationSchema={LoginSchema}
-        onSubmit={(values) => {
+        onSubmit={async (values) => {
           const { email, password } = values;
           if (email === "admin123@gmail.com" && password === "admin123") {
             window.location.href = "/admin/dashboard";

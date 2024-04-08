@@ -8,6 +8,7 @@ import { Button } from "react-bootstrap";
 const CreateForm = ({
   title: existingTitle = "",
   para: existingDescription = "",
+  date: existingDate = "",
   img: existingImage = null,
   onSubmit = () => {},
   loading = false,
@@ -15,12 +16,14 @@ const CreateForm = ({
   const project_data = {
     title: existingTitle || "",
     para: existingDescription || "",
+    date: existingDate || "",
     img: existingImage || "",
   };
 
   const project_schema = Yup.object().shape({
     title: Yup.string().required("Title is Required"),
     para: Yup.string().required("Description is Required"),
+    date: Yup.string().required("Date is Required"),
   });
 
   const [data, setData] = useState(project_data);
@@ -32,8 +35,8 @@ const CreateForm = ({
       const formData = new FormData();
       formData.append("title", values.title);
       formData.append("para", values.para);
+      formData.append("date", values.date);
       formData.append("img", values.img);
-
       onSubmit(formData);
     },
   });
@@ -76,6 +79,26 @@ const CreateForm = ({
           />
           {formik.errors.para && formik.touched.para ? (
             <em className=" text-danger">{formik.errors.para}</em>
+          ) : null}
+        </div>
+      </Form.Group>
+
+      <Form.Group className="mb-3 d-flex" controlId="date">
+        <div style={{ width: "20%" }}>
+          <Form.Label>Date : </Form.Label>
+        </div>
+        <div style={{ width: "100%" }}>
+          <Form.Control
+            style={{ width: "100%" }}
+            className="border p-2"
+            name="date"
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.date}
+            placeholder="Enter Date"
+          />
+          {formik.errors.date && formik.touched.date ? (
+            <em className=" text-danger">{formik.errors.date}</em>
           ) : null}
         </div>
       </Form.Group>

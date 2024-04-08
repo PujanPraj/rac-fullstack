@@ -13,13 +13,13 @@ import {
 
 router.route("/").post(upload.single("img"), createProject).get(getAllProjects);
 
+router.route("/latestProjects").get(getLatestProjects);
+router.route("/randomProjects").get(getRandomProjects);
+
 router
   .route("/:id")
   .put(upload.single("img"), updateProject)
   .delete(deleteProject)
   .get(getProjectById);
-
-router.route("/latestProjects").get(getLatestProjects);
-router.route("/randomProjects").get(getRandomProjects);
 
 export default router;
