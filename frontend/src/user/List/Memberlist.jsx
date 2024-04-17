@@ -36,7 +36,7 @@ const Members = [
   },
   {
     img: "./images/members/m8.jpg",
-    name: "Rtr.  Bijayashree Rawal",
+    name: "Rtr. Bijayashree Rawal",
     post: "Member",
   },
   {

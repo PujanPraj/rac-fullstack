@@ -11,7 +11,7 @@ const Presidentpage = (props) => {
               <div className="col-12 col-md-6 col-lg-3 ">
                 <div data-aos={val.aos}>
                   <div className="card">
-                    <img src={val.img} alt="" />
+                    <img src={val.image} alt={val.name} />
                     <div className="card-text">
                       <h5>{val.name}</h5>
                       <h6>{val.post}</h6>

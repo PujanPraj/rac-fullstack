@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./CSS/President.css";
-
-const IPP = "./images/boardmember/IPP.jpg";
-const president = "./images/boardmember/president.jpg";
+import axios from "axios";
+import { REACT_URL } from "../../constants/ReactUrl";
 
 const color = "#A61151";
 
 const President = () => {
+  const [president, setPresident] = useState(null);
+  const [pName, setPName] = useState(null);
+
+  useEffect(() => {
+    const fetchPresident = async () => {
+      const response = await axios.get(
+        `${REACT_URL}/boardMembers/getPresident`
+      );
+      if (response.data.success) {
+        setPresident(response.data.data.image);
+        setPName(response.data.data.name);
+      } else {
+        console.log(response.data.message);
+      }
+    };
+    fetchPresident();
+  }, []);
+
   return (
     <>
       <div className="presidentSection py-5">
@@ -23,7 +40,7 @@ const President = () => {
                 <div className="imageItems">
                   <img src={president} alt="" />
                   <div className="text">
-                    <h5>Rtr. Manish Prajapati</h5>
+                    <h5>{pName}</h5>
                     <h6>President</h6>
                   </div>
                 </div>

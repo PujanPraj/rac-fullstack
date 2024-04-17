@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Heading from "../Homecomponent/Heading";
 import Procard from "../Homecomponent/Procard";
-import Projectpagelist from "../List/Projectpagelist";
 import axios from "axios";
 import { REACT_URL } from "../../constants/ReactUrl";
 

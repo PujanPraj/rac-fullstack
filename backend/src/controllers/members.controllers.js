@@ -35,7 +35,7 @@ export const createMembers = asyncHandler(async (req, res) => {
 //get all  members
 export const getAllMembers = asyncHandler(async (req, res) => {
   try {
-    const AllMembers = await Members.find();
+    const AllMembers = await Members.find().sort({ post: 1 });
     return res
       .status(200)
       .json(new ApiResponse(200, AllMembers, "Members fetched successfully"));

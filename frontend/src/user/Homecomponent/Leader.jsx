@@ -1,15 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Heading from "./Heading";
 import "./CSS/Leader.css";
 import "owl.carousel/dist/assets/owl.carousel.min.css";
 import "owl.carousel/dist/assets/owl.theme.default.min.css";
 import OwlCarousel from "react-owl-carousel";
-import Leaderlist from "../List/Leaderlist";
+import { REACT_URL } from "../../constants/ReactUrl";
+import axios from "axios";
 
 const Leader = () => {
+  const [leader, setLeader] = useState([]);
+
+  useEffect(() => {
+    const fetchLeader = async () => {
+      try {
+        const response = await axios.get(`${REACT_URL}/leaders`);
+        if (response.data.success) {
+          setLeader(response.data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchLeader();
+  }, []);
+
   const options = {
     items: "4",
-    nav: "true",
+    // nav: "true",
     responsive: {
       0: {
         items: 1,
@@ -36,7 +53,7 @@ const Leader = () => {
 
           <div className="leaderCarousel">
             <OwlCarousel className="owl-theme " loop autoplay {...options}>
-              {Leaderlist.map((val) => {
+              {leader.map((val) => {
                 return (
                   <>
                     <div className="item">

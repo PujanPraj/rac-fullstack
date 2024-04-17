@@ -151,7 +151,7 @@ export const deleteBoardMembers = asyncHandler(async (req, res) => {
 //get president
 export const getPresident = asyncHandler(async (req, res) => {
   try {
-    const president = await BoardMembers.findOne({ post: "president" });
+    const president = await BoardMembers.findOne({ post: "President" });
     return res
       .status(200)
       .json(new ApiResponse(200, president, "President fetched successfully"));
