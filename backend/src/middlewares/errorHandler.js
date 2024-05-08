@@ -1,7 +1,6 @@
 import { ApiError } from "../utils/ApiError.js";
 
 // not Found
-
 export const notFound = (req, res, next) => {
   const error = new Error(`Page Not Found : ${req.originalUrl}`);
   res.status(404);
@@ -9,7 +8,6 @@ export const notFound = (req, res, next) => {
 };
 
 // Error Handler
-
 export const errorHandler = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.message = err.message || "Internal Server Error";

@@ -43,10 +43,6 @@ const LoginPage = () => {
               <div className="error">{errors.password}</div>
             ) : null}
 
-            <p>
-              Don't have account? <a href="/register">Register now</a>
-            </p>
-
             <Button className="form-btn mt-3" type="submit">
               Submit
             </Button>
